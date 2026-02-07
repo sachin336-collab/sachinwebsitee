@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Saswat | My Forever Valentine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@200;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-pink: #fff0f3;
+            --rose-blush: #ffb7c5;
+            --deep-rose: #d63384;
+            --glass-white: rgba(255, 255, 255, 0.9);
+            --shadow-color: rgba(214, 51, 132, 0.15);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background: linear-gradient(135deg, #fffcfc 0%, #fff0f3 100%);
+            color: #4a4a4a;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- DECORATIVE BACKGROUND --- */
+        .petal {
+            position: fixed; top: -10%; color: var(--rose-blush);
+            user-select: none; pointer-events: none; z-index: -1;
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* --- CARDS & UI --- */
+        .glass-card {
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 183, 197, 0.3);
+            border-radius: 60px;
+            box-shadow: 0 30px 70px var(--shadow-color);
+        }
+
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-cursive { font-family: 'Dancing Script', cursive; }
+
+        .btn-valentine {
+            background: white;
+            color: var(--deep-rose);
+            border: 1px solid var(--rose-blush);
+            font-weight: 600;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-valentine::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        .btn-valentine:hover::after { left: 100%; }
+        .btn-valentine:hover {
+            background: var(--rose-blush);
+            color: white;
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+
+        .hidden { display: none; }
+
+        /* --- VIDEO & MEDIA --- */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+            border: 5px solid white;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* --- MEMORY WALL --- */
+        .polaroid {
+            background: white;
+            padding: 20px 20px 50px 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .polaroid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 2px;
+            filter: contrast(1.05) brightness(1.02);
+        }
+        .polaroid:hover {
+            transform: scale(1.05) translateY(-10px);
+            z-index: 50;
+            box-shadow: 0 30px 60px rgba(214, 51, 132, 0.2);
+        }
+
+        /* --- ANIMATIONS --- */
+        .heart-pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 10px var(--rose-blush)); }
+            100% { transform: scale(1); }
+        }
+
+        .fade-in { animation: fadeIn 1s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .shimmer {
+            background: linear-gradient(90deg, #d63384, #ffb7c5, #d63384);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .divider {
+            width: 150px; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--rose-blush), transparent);
+            margin: 40px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="max-w-5xl mx-auto px-6 py-16 relative z-10">
+        
+        <header id="home-screen" class="text-center py-20 fade-in">
+            <div class="mb-10 text-7xl heart-pulse">🌸</div>
+            <p class="font-serif italic text-rose-400 tracking-[0.5em] text-xs mb-8 uppercase font-bold">A Heart-Woven Sanctuary for Saswat Patra</p>
+            <h1 class="font-serif text-5xl md:text-8xl mb-10 text-gray-800 leading-tight">i am sorryy na <span class="shimmer italic">subhuuu</span></h1>
+            <p class="font-cursive text-5xl text-rose-500 mb-24">Always yours, every second of every day... ✨</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <button onclick="nav('page-letter')" class="btn-valentine p-8 rounded-3xl shadow-md text-xl italic font-serif">💌 Read My Letter</button>
+                <button onclick="nav('page-my-promises')" class="btn-valentine p-8 rounded-3xl shadow-md text-xl italic font-serif">✨ My Promises</button>
+                <button onclick="nav('page-memories')" class="btn-valentine p-8 rounded-3xl shadow-md text-xl italic font-serif">📸 Our Memories</button>
+                <button onclick="nav('page-questions')" class="btn-valentine p-8 rounded-3xl shadow-md text-xl italic font-serif">❓ So Many Questions</button>
+                <button onclick="nav('page-vows')" class="btn-valentine p-8 rounded-3xl shadow-md text-xl italic font-serif">🤝 Our Shared Vows</button>
+                <button onclick="nav('page-song')" class="btn-valentine p-8 rounded-3xl shadow-md text-xl italic font-serif">🎵 Our Songs</button>
+            </div>
+        </header>
+
+        <section id="page-letter" class="hidden fade-in">
+            <button onclick="nav('home-screen')" class="mb-12 text-rose-400 font-serif tracking-widest text-sm uppercase font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                <span>←</span> BACK TO SANCTUARY
+            </button>
+            <div class="glass-card p-12 md:p-24 shadow-2xl relative">
+                <div class="absolute top-10 right-10 opacity-10 text-9xl">💌</div>
+                <div class="letter-content font-sans text-gray-700 text-lg md:text-2xl leading-relaxed space-y-10 max-w-4xl mx-auto">
+                    <h2 class="font-serif text-6xl text-gray-800 italic border-b-2 border-rose-50 pb-6">Saswat,</h2>
+                    
+                    <p>I hope you’re doing okay… I know you probably are. I also know I may not matter as much to you right now, and maybe whatever I say won’t reach you—but still, my heart wants to try one last time.</p>
+                    
+                    <p class="font-bold text-rose-500 italic text-2xl">Before anything else, please know this from the deepest place in my soul:</p>
+                    
+                    <p class="text-5xl md:text-7xl text-center font-cursive text-rose-600 py-12 shimmer">
+                        "I love you. Genuinely. Truly. Always. ❤️"
+                    </p>
+
+                    <p>I don’t even know where to begin, but all I want to say is I am deeply sorry—for everything. Not for one moment or one mistake, but for everything from the beginning till now. I sincerely wish we could give ourselves a second chance—not to repeat the past, but to start fresh, from scratch.</p>
+
+                    <p>Somewhere deep down, I still believe that if God brought us together once, there was a reason… maybe even a plan meant to teach us, shape us, and bring us back better 🤍</p>
+
+                    <p class="bg-white/40 p-10 rounded-[40px] border-r-4 border-rose-100 italic">
+                        <b>Subhuu,</b> I’ve understood something very important—forgiveness is what truly lasts. At some point, we both have to accept that in love, two people will hurt each other—sometimes unintentionally, sometimes out of emotions. But that doesn’t mean we give up on each other. Love is about staying, learning, and choosing each other again.
+                    </p>
+
+                    <div class="bg-rose-50/50 p-10 md:p-14 rounded-[50px] border-l-8 border-rose-300 italic shadow-inner my-16 space-y-6">
+                        <p>I also want to honestly accept my mistakes.</p>
+                        <p>"Letting a third person interfere in our relationship was wrong. I didn’t respect your words even after you told me so many times, and for that, I’m truly sorry. You didn’t deserve that."</p>
+                        <p>My anger… my worst side—I know it hurt you the most. I’ve realized how wrong I was. When I was angry, I said things I never truly meant. Those words came from the heat of the moment, not from my heart. I’ve learned now that anger needs a pause ⏸️, not words.</p>
+                    </div>
+
+                    <p>I know I didn’t always make you happy. Maybe I even made you feel low at times. But relationships aren’t only about happiness—they’re about ups and downs, growing together, supporting each other, and learning how to love better 🤍</p>
+
+                    <p>And yes, going on that trip was a big mistake. I hurt your boundaries, and I hurt you. For that, I am truly, deeply sorry 🥺</p>
+
+                    <div class="py-12 text-center">
+                        <p class="text-3xl font-serif text-gray-800">
+                            Soumya… Saswat Patra… <br>
+                            <span class="text-rose-500">Among billions of hands in this world, I still want to hold only yours.</span>
+                        </p>
+                    </div>
+
+                    <p>I once told you—to win you, I’m always ready to lose. And that’s my biggest achievement in love ❤️ Please don’t let any third person, ego, or misunderstanding win over what we shared. If something can still be saved, let it be us.</p>
+
+                    <div class="mt-24 text-right">
+                        <p class="font-serif italic text-sm text-gray-400 uppercase tracking-widest">Incomplete without you,</p>
+                        <p class="font-cursive text-7xl text-rose-500 mt-6">Your Sachuuuu 🤍</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-memories" class="hidden fade-in">
+            <button onclick="nav('home-screen')" class="mb-12 text-rose-400 font-serif tracking-widest text-sm uppercase font-bold">← BACK</button>
+            <div class="glass-card p-12 md:p-24 text-center">
+                <h2 class="font-serif text-5xl text-gray-800 mb-8 italic">The Memory Vault</h2>
+                <p class="font-cursive text-3xl text-rose-500 mb-16">The moments we built, captured forever...</p>
+                
+                <div class="flex flex-col items-center mb-20">
+                    <label for="mem-upload" class="btn-valentine px-16 py-6 rounded-full cursor-pointer shadow-xl mb-6 text-xl">
+                        📸 Click to Upload a New Memory
+                    </label>
+                    <input type="file" id="mem-upload" class="hidden" accept="image/*" onchange="saveMemory(event)">
+                    <p class="text-sm text-gray-400 italic">These photos will stay here as long as you use this browser 🤍</p>
+                </div>
+
+                <div id="memory-wall" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    </div>
+            </div>
+        </section>
+
+        <section id="page-song" class="hidden fade-in">
+            <button onclick="nav('home-screen')" class="mb-12 text-rose-400 font-serif tracking-widest text-sm uppercase font-bold">← BACK</button>
+            <div class="glass-card p-12 md:p-24 text-center space-y-24">
+                <div class="mb-8">
+                    <h2 class="font-serif text-5xl text-gray-800 mb-4 italic">Our Shared Soundtrack</h2>
+                    <p class="font-cursive text-3xl text-rose-400">Turn the volume up and feel the words...</p>
+                </div>
+
+                <div class="space-y-8">
+                    <h3 class="font-serif text-4xl text-gray-800 italic">1. Tum Ho Toh</h3>
+                    <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/rOUuGvJkBrQ"></iframe></div>
+                    <p class="font-cursive text-2xl text-rose-400 italic">"When you are there, everything is perfect..."</p>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="space-y-8">
+                    <h3 class="font-serif text-4xl text-gray-800 italic">2. Humsafar</h3>
+                    <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/0NXnRmoILSs"></iframe></div>
+                    <p class="font-cursive text-2xl text-rose-500">"When we were about to return after a long drive..."</p>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="space-y-8">
+                    <h3 class="font-serif text-4xl text-gray-800 italic">3. Saiyaara</h3>
+                    <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/asG7cwxi1sA"></iframe></div>
+                    <div class="bg-white/50 p-6 rounded-2xl">
+                        <p class="font-cursive text-2xl text-rose-500 italic">"When you were about to go and i listened this saiyaara..."</p>
+                        <p class="text-gray-400 text-sm uppercase mt-4">Note: Listening to this when you were leaving India.</p>
+                    </div>
+                </div>
+
+                     <div class="space-y-8">
+                    <h3 class="font-serif text-4xl text-gray-800 italic">4. barbaad female version</h3>
+                    <div class="video-wrapper"><iframe src="https://www.youtube.com/embed/3pYKz7Ex-28?si=vVLYu-26qZmSEUuS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+                    <div class="bg-white/50 p-6 rounded-2xl">
+                        <p class="font-cursive text-2xl text-rose-500 italic">"When we actually had a fight i dedicated this song "</p>
+                        <p class="text-gray-400 text-sm uppercase mt-4">Note: the last line of this song means i will always loose to win you</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-vows" class="hidden fade-in">
+            <button onclick="nav('home-screen')" class="mb-12 text-rose-400 font-serif tracking-widest text-sm uppercase font-bold">← BACK</button>
+            <div class="glass-card p-12 md:p-24 text-center">
+                <h2 class="font-serif text-6xl text-gray-800 mb-16 italic underline decoration-rose-100">Our Shared Vows</h2>
+                <div class="space-y-16 text-gray-700 leading-relaxed text-2xl max-w-4xl mx-auto">
+                    <p class="font-cursive text-6xl text-rose-500">My Sachuu,</p>
+                    
+                    <p class="text-4xl italic font-serif text-gray-800 shimmer">
+                        "I promise no matter where life takes us or how far we are my heart will always find its way back to you. 💫"
+                    </p>
+                    
+                    <div class="bg-white/80 p-12 md:p-16 rounded-[60px] border-2 border-rose-50 shadow-2xl relative">
+                        <p class="mb-8">
+                            I’ll love you endlessly, care for you deeply, and stay loyal through every high and low. 
+                            I’ll listen not just to your words but to your silences, support you in your dreams, 
+                            and remind you every day that you matter to me.
+                        </p>
+                        <p>
+                            I’ll keep our spark alive through every call, every “I love you,” and every quiet moment we share.
+                        </p>
+                    </div>
+
+                    <div class="py-12 border-y border-rose-100">
+                        <p class="text-4xl font-serif text-gray-800">
+                            You are my peace, my constant, my forever and I promise to come back to you, 
+                            again and again, until distance no longer exists between us. 🤍🥺🤍
+                        </p>
+                    </div>
+
+                    <button onclick="acceptVows()" class="btn-valentine px-20 py-8 rounded-full text-2xl shadow-2xl">
+                        🤝 Accept These Vows Forever
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-questions" class="hidden fade-in">
+            <button onclick="nav('home-screen')" class="mb-12 text-rose-400 font-serif tracking-widest text-sm uppercase font-bold">← BACK</button>
+            <div class="glass-card p-12 md:p-24">
+                <h2 class="font-serif text-5xl text-gray-800 mb-6 text-center italic">The Unasked Questions</h2>
+                <p class="font-cursive text-3xl text-rose-400 text-center mb-20">Because my heart is a curious thing 💭</p>
+                
+                <div class="grid grid-cols-1 gap-12 max-w-4xl mx-auto">
+                    <div class="p-10 bg-white/50 rounded-[40px] border-l-[12px] border-rose-300 shadow-sm hover:translate-x-4 transition-transform">
+                        <p class="text-gray-800 italic text-2xl font-serif">"Do you remember the exact moment you realized I was your Sachuu?"</p>
+                    </div>
+                    <div class="p-10 bg-rose-50/40 rounded-[40px] border-r-[12px] border-rose-200 shadow-sm hover:-translate-x-4 transition-transform text-right">
+                        <p class="text-gray-800 italic text-2xl font-serif">"Do you ever look at the stars and wonder if I'm looking at them too, thinking of you?"</p>
+                    </div>
+                    <div class="p-10 bg-white/50 rounded-[40px] border-l-[12px] border-rose-300 shadow-sm hover:translate-x-4 transition-transform">
+                        <p class="text-gray-800 italic text-2xl font-serif">"When we finally bridge this distance, what's the first thing you want to tell me in person?"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-my-promises" class="hidden fade-in">
+            <button onclick="nav('home-screen')" class="mb-12 text-rose-400 font-serif tracking-widest text-sm uppercase font-bold">← BACK</button>
+            <div class="glass-card p-12 md:p-24 text-center">
+                <div class="mb-12 text-8xl heart-pulse">💍</div>
+                <h2 class="font-serif text-5xl text-gray-800 mb-12 italic">My Solemn Promise</h2>
+                <div class="space-y-16 font-sans text-2xl text-gray-700">
+                    <p class="font-cursive text-6xl text-rose-500 italic">To my one and only Saswat,</p>
+                    <div class="bg-rose-50/30 p-16 rounded-[60px] border-4 border-double border-rose-100 shadow-2xl">
+                        <p class="mb-10 leading-relaxed italic">
+                            I always promise you, Saswat, that I will understand you in every ups and down. 
+                            I will always be your <span class="text-rose-500 font-bold decoration-dotted underline">understanding partner</span>.
+                        </p>
+                        <p class="text-4xl font-serif text-gray-800 font-bold">
+                            "Even if you show your worst side, I will always love you."
+                        </p>
+                    </div>
+                    <p class="text-5xl font-cursive text-rose-600 pt-10 shimmer">
+                        I love youuuuu subhuuu ❤️
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // --- PETAL ANIMATION ---
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const icons = ['🌸', '✨', '🤍', '💖', '🌸'];
+            petal.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = Math.random() * 20 + 10 + 'px';
+            petal.style.animationDuration = Math.random() * 6 + 4 + 's';
+            petal.style.opacity = Math.random() * 0.6 + 0.3;
+            document.body.appendChild(petal);
+            setTimeout(() => { petal.remove(); }, 10000);
+        }
+        setInterval(createPetal, 500);
+
+        // --- NAVIGATION ---
+        function nav(pageId) {
+            document.querySelectorAll('section, header').forEach(el => el.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // --- VOWS ACTION ---
+        function acceptVows() {
+            confetti({ 
+                particleCount: 300, 
+                spread: 100, 
+                origin: { y: 0.6 }, 
+                colors: ['#ffb7c5', '#d63384', '#ffffff'] 
+            });
+            alert("Vows Accepted 🤍 Pinky Promise Forever!");
+        }
+
+        // --- PERSISTENT MEMORY STORAGE ---
+        function saveMemory(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    const timestamp = new Date().toLocaleDateString();
+                    
+                    // Save to Local Storage array
+                    let memories = JSON.parse(localStorage.getItem('ourMemories')) || [];
+                    memories.push({ img: imageData, date: timestamp });
+                    localStorage.setItem('ourMemories', JSON.stringify(memories));
+                    
+                    renderMemories();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function renderMemories() {
+            const wall = document.getElementById('memory-wall');
+            const memories = JSON.parse(localStorage.getItem('ourMemories')) || [];
+            wall.innerHTML = ''; // Clear current
+
+            memories.reverse().forEach((mem, index) => {
+                const div = document.createElement('div');
+                div.className = "polaroid fade-in";
+                div.style.animationDelay = (index * 0.1) + 's';
+                div.style.transform = `rotate(${Math.random() * 6 - 3}deg)`;
+                div.innerHTML = `
+                    <img src="${mem.img}">
+                    <p class="font-cursive text-2xl text-rose-500 mt-4 italic">Captured on ${mem.date}</p>
+                    <button onclick="deleteMem(${index})" class="text-[10px] text-gray-300 hover:text-rose-300 mt-2 uppercase tracking-tighter">Remove Memory</button>
+                `;
+                wall.appendChild(div);
+            });
+
+            if(memories.length === 0) {
+                wall.innerHTML = `<div class="col-span-full py-20 text-gray-300 italic">No memories here yet... start our wall 🤍</div>`;
+            }
+        }
+
+        function deleteMem(idx) {
+            let memories = JSON.parse(localStorage.getItem('ourMemories')) || [];
+            memories.reverse().splice(idx, 1);
+            localStorage.setItem('ourMemories', JSON.stringify(memories.reverse()));
+            renderMemories();
+        }
+
+        // Load memories on startup
+        window.onload = () => {
+            renderMemories();
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.8 } });
+        };
+    </script>
+</body>
+</html>
